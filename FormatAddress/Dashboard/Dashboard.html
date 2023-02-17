@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AddressApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/Dashboard/Dashboard.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body>
+    <div class="bodyOfDashboard">
+        <div class="header">
+            <p class="employHeading">ADDRESS</p>
+        </div>
+
+        <div class="InputDataText">
+            <p >Input Data</p>
+        </div>
+        <div class="InputForData">
+            <form class="InputForm" name="addressForm">
+                <input name="fullAddress" ng-maxlength="165" class="InputBoxOfForm1" type="text" ng-model="singleLineAddress" placeholder="Single line address">
+                <br>
+                <span ng-show="addressForm.fullAddress.$touched && addressForm.fullAddress.$error.maxlength">Maximum 165 characters.</span><br /><br />
+                <div class="addressPart2">
+                    <input class="InputBoxOfForm2" ng-model="pincode" type="text" placeholder="Pincode">
+                    <input class="InputBoxOfForm2" ng-model="city" type="text" placeholder="City">
+                    <input class="InputBoxOfForm2" ng-model="district" type="text" placeholder="District">
+                    <input class="InputBoxOfForm2" ng-model="state" type="text" placeholder="State">
+                    <input class="InputBoxOfForm2" ng-model="country" type="text" placeholder="Country">
+                </div>
+                <p id="errMessage"></p>
+                <div class="buttonDiv">
+                    <Button class="Button1" type="submit" ng-click="add(singleLineAddress,pincode,city,district,state,country)">
+                        Split & Save
+                    </Button>
+                </div>
+            </form>
+        </div>
+        <div class="OutputForData">
+            <div class="InputDataText">
+                <p>Show Address after saved</p>
+            </div>
+            <form class="outputForm">
+                <p>Addressline1 : {{address.addressline1}}</p>
+                <p>Addressline2 : {{address.addressline2}}</p>
+                <p>Addressline3 : {{address.addressline3}}</p>
+                <p>Pincode : {{address.pincode}}</p>
+                <p>City : {{address.city}}</p>
+                <p>District : {{address.district}}</p>
+                <p>State : {{address.state}}</p>
+                <p>Country : {{address.country}}</p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

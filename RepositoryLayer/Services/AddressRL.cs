@@ -37,9 +37,9 @@ namespace RepositoryLayer.Services
 
                     int Count = addressParts.Length;
 
-                    if (Count < 3 )
+                    if (Count < 3)
                     {
-                        addressModel2.Addressline1 = emp.SingleLineAddress;
+                        addressModel2.Addressline1 = emp.SingleLineAddress + ", " + emp.City + ", " + emp.District;
                         addressModel2.Addressline2 = emp.City + ", " + emp.District;
                         addressModel2.Addressline3 = emp.Country;
                         

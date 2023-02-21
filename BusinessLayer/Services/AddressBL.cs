@@ -26,6 +26,20 @@ namespace BusinessLayer.Services
             }
         }
 
+        // Address method 2
+
+        public AddressModel2 AddAddress2(AddressModel2 emp)
+        {
+            try
+            {
+                return iAddressRL.AddAddress2(emp);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<AddressModel2> GetAllAddress()
         {
             try

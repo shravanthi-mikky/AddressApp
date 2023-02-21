@@ -39,6 +39,30 @@ namespace AddAddressApp.Controllers
             }
         }
 
+        // public AddressModel2 AddAddress2(AddressModel2 emp)
+        [HttpPost("Add2")]
+        public IActionResult AddAddress2(AddressModel2 model)
+        {
+            try
+            {
+                var address = iAddressBL.AddAddress2(model);
+                if (address != null)
+                {
+                    return this.Ok(new { Success = true, message = "Added successfully", Data = address });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Unable to add" });
+                }
+            }
+            catch (System.Exception e)
+            {
+
+                return this.BadRequest(new { Success = false, message = e.Message });
+            }
+        }
+
+
         [HttpGet("GetAll")]
         public IActionResult GetAllAddress()
         {

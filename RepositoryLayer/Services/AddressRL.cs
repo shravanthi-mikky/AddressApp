@@ -37,12 +37,11 @@ namespace RepositoryLayer.Services
 
                     int Count = addressParts.Length;
 
-                    if (Count < 3 )
+                    if (Count < 3)
                     {
-                        addressModel2.Addressline1 = emp.SingleLineAddress;
+                        addressModel2.Addressline1 = emp.SingleLineAddress + ", " + emp.City + ", " + emp.District;
                         addressModel2.Addressline2 = emp.City + ", " + emp.District;
                         addressModel2.Addressline3 = emp.Country;
-                        
                     }
                     else if(Count >= 5)
                     {
@@ -81,7 +80,7 @@ namespace RepositoryLayer.Services
                 addressModel2.State = emp.State;
                 addressModel2.Country = emp.Country;
 
-                   return addressModel2;
+                return addressModel2;
             }
             catch (Exception e)
             {
@@ -115,6 +114,40 @@ namespace RepositoryLayer.Services
 
                     com.ExecuteNonQuery();
                     return addressModel3;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        public AddressModel2 AddAddress2(AddressModel2 emp)
+        {
+            try
+            {
+                using (sqlConnection = new NpgsqlConnection(ConnString))
+                {
+                    NpgsqlCommand com = new NpgsqlCommand("call Sp_AddAddress(:Addressline1,:Addressline2,:Addressline3,:Pincode,:City,:District,:State,:Country)", sqlConnection);
+                    com.CommandType = System.Data.CommandType.Text;
+                    sqlConnection.Open();
+
+                    // Apply Validations
+                    com.Parameters.AddWithValue("Addressline1", DbType.String).Value = emp.Addressline1;
+                    com.Parameters.AddWithValue("Addressline2", DbType.String).Value = emp.Addressline2;
+                    com.Parameters.AddWithValue("Addressline3", DbType.String).Value = emp.Addressline3;
+                    com.Parameters.AddWithValue("Pincode", DbType.String).Value = emp.Pincode;
+                    com.Parameters.AddWithValue("City", DbType.String).Value = emp.City;
+                    com.Parameters.AddWithValue("District", DbType.String).Value = emp.District;
+                    com.Parameters.AddWithValue("State", DbType.String).Value = emp.State;
+                    com.Parameters.AddWithValue("Country", DbType.String).Value = emp.Country;
+
+                    com.ExecuteNonQuery();
+                    return emp;
                 }
             }
             catch (Exception e)

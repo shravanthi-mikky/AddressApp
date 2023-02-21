@@ -12,5 +12,7 @@ namespace BusinessLayer.Interfaces
         public List<AddressModel2> GetAllAddress();
 
         public AddressModel2 RetriveAddress(long EmployeeId);
+
+        public AddressModel2 AddAddress2(AddressModel2 emp);
     }
 }

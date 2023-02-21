@@ -14,5 +14,7 @@ namespace RepositoryLayer.Interfaces
         public AddressModel2 RetriveAddress(long EmployeeId);
 
         public AddressModel2 AddAddressAndSplit(AddressModel emp);
+
+        public AddressModel2 AddAddress2(AddressModel2 emp);
     }
 }
